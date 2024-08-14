@@ -110,7 +110,7 @@ Use Postman or any API client to test the endpoints. Make sure to include the JW
 
 
 ## Postman Collection
-You can find the Postman collection for testing the API in the [Postman Collection](Banking System API.postman_collection.json)
+You can find the Postman collection for testing the API in the [Postman Collection](https://github.com/Sorphy/banking-system/blob/main/Banking%20System%20API.postman_collection.json)
 
 
 ## License
