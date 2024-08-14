@@ -14,10 +14,14 @@ The Banking System API is a backend service built with Node.js, TypeScript, and 
 ## Project Structure
 
 - **`src/`**: Contains the source code for the project.
+  - **`config/`**: Includes onfiguration file for database connection.
+     - `db.ts`: Sets up and connects to the PostgreSQL database using Sequelize.
   - **`controllers/`**: Includes the logic for handling requests and interacting with the database.
-    - `authController.ts`: Handles user authentication and registration.
     - `accountController.ts`: Manages account creation and retrieval.
+    - `authController.ts`: Handles user authentication and registration.
     - `transactionController.ts`: Manages transactions and transfers.
+  - **`middleware/`**: Contains middleware functions for request processing.
+    - `authMiddleware.ts`:  Authenticates JWT tokens to protect routes.
   - **`models/`**: Defines the Sequelize models for User, Account, and Transaction.
   - **`routes/`**: Defines the API routes for different resources.
     - `authRoute.ts`: Routes for authentication and user management.
@@ -25,12 +29,12 @@ The Banking System API is a backend service built with Node.js, TypeScript, and 
     - `transactionRoutes.ts`: Routes for transaction management.
   - **`utils/`**: Contains utility functions, including validation functions.
     - `validation.ts`: Provides utility functions for input validation.
-  - **`config/`**: Configuration files for database connection and environment variables.
   - **`app.ts`**: Main application file that sets up middleware and routes.
-
-- **`dist/`**: Contains the compiled JavaScript files.
-- **`.env`**: Environment variables configuration file.
+- **`dist/`**: (Generated) Compiled and build artifacts. **Not included in version control.**
+- **`.env`**: Environment variables configuration file. **Not included in version control.**
+- **`.gitignore`**: File to specify which files and directories to ignore in version control.
 - **`package.json`**: Contains project metadata and dependencies.
+- **`README.md`**: Project documentation and setup instructions.
 - **`tsconfig.json`**: TypeScript configuration file.
 
 ## Installation
@@ -108,6 +112,10 @@ The Banking System API is a backend service built with Node.js, TypeScript, and 
 
 ## Testing
 Use Postman or any API client to test the endpoints. Make sure to include the JWT token in the Authorization header as a Bearer token for endpoints requiring authentication.
+
+
+## Postman Collection
+You can find the Postman collection for testing the API in the [Postman Collection](Banking System API.postman_collection.json)
 
 
 ## License
