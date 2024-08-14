@@ -115,10 +115,8 @@ The Banking System API is a backend service built with Node.js, TypeScript, and 
   - **POST /transactions/transfer**: Transfer funds between accounts.
 
 
-## Testing
-Use Postman or any API client to test the endpoints. Make sure to include the JWT token in the Authorization header as a `Bearer token` for endpoints requiring authentication.
-
 ## How to Test the API
+Use Postman or any API client to test the endpoints. Make sure to include the JWT token in the Authorization header as a `Bearer token` for endpoints requiring authentication. 
 
 ### Postman Collection
 To test the API, import the provided Postman collection into Postman. 
