@@ -1,0 +1,1452 @@
+{
+	"info": {
+		"_postman_id": "730b6563-1757-4fea-98c0-456a3e3fc157",
+		"name": "Banking System API",
+		"description": "This Postman collection provides endpoints for managing a banking system, including user authentication, account management, and transactions.\n\n1. **User Authentication:**\n    \n\n- **Register New Users:** Endpoint to register new users with validation checks.\n- **Login:** Endpoint for users to log in and obtain a JWT for authentication.\n- **Retrieve User Information:** Endpoint to fetch the current user's profile using JWT authentication.\n    \n\n2\\. **Account Management:**\n\n- **Create Account:** Endpoint to create a new account for a user.\n- **List All Accounts:** Endpoint to retrieve a list of all accounts associated with the user.\n    \n\n1. **Transaction Management:**\n    \n\n- **Create Transaction:** Endpoint to create a new transaction for a specified account, including transaction type, amount, and description.\n- **List All Transactions:** Endpoint to retrieve a list of all transactions associated with the user.\n- **Money Transfer:** Endpoint to transfer money between two accounts, including details of the debit and credit transactions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26371214"
+	},
+	"item": [
+		{
+			"name": "User Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sorphy Arike\",\n    \"email\": \"sorphyat@gmail.com\",\n    \"password\": \"opetiti234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registers a new user with their name, email, and password. The registration process includes validation to ensure the correct name format (minimum of two names, maximum of three, and containing only letters). Returns user details upon successful registration or an error message if validation fails."
+					},
+					"response": [
+						{
+							"name": "example - Unsuccessful user reg.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Ade\",\n    \"email\": \"adeg@gmail.com\",\n    \"password\": \"opetiti234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6c-/B1hRa1ZAC7JOdOgzMIyZ1rj5f4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:21:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid name format. Kindly input your first name and surname, and you may add your middle name.\"\n}"
+						},
+						{
+							"name": "example - successful user reg",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Sorphy Arike\",\n    \"email\": \"sorphyat@gmail.com\",\n    \"password\": \"opetiti234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "248"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f8-yweCjBvJIOQlbFKnfcbZfCY/jEk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:23:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"fa148d89-ee75-4799-8e94-21a537eb1898\",\n    \"name\": \"Sorphy Arike\",\n    \"email\": \"sorphyat@gmail.com\",\n    \"password\": \"$2a$10$aKN3sIm7F.8iWRLow56TWudlTtPFUpVQ397nk1PJrzJu1UKHk3K/S\",\n    \"updatedAt\": \"2024-08-14T07:23:28.550Z\",\n    \"createdAt\": \"2024-08-14T07:23:28.550Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sorphy@gmail.com\",\n    \"password\": \"opetiti234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Logs in a user with their email and password. Returns a JWT token upon successful authentication. Includes examples for both valid and invalid credentials."
+					},
+					"response": [
+						{
+							"name": "example - login successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"sorphyat@gmail.com\",\n    \"password\": \"opetiti234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cc-vNjjEYDbQuL1Wwe4vivo0zB6JFY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:24:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTE0OGQ4OS1lZTc1LTQ3OTktOGU5NC0yMWE1MzdlYjE4OTgiLCJpYXQiOjE3MjM2MjAyNjcsImV4cCI6MTcyMzYyMzg2N30.MRZRZXQDfeyvRM2pmkQt209Q0aPzxiR2Ttg37uUuYUU\"\n}"
+						},
+						{
+							"name": "example - login unsuccessful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"sorphy@gmail.com\",\n    \"password\": \"opetiti234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-mRYQ6Yx/raK/ssDeWseqQCiH0yM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:27:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get current user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTE0OGQ4OS1lZTc1LTQ3OTktOGU5NC0yMWE1MzdlYjE4OTgiLCJpYXQiOjE3MjM2MjAyNjcsImV4cCI6MTcyMzYyMzg2N30.MRZRZXQDfeyvRM2pmkQt209Q0aPzxiR2Ttg37uUuYUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						},
+						"description": "Retrieves details of the currently authenticated user using a valid JWT token."
+					},
+					"response": [
+						{
+							"name": "example - invalid toke, couldn't get current user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/auth/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-1luTU257I9tvKUXOJotGBQDVDqk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:30:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid token\"\n}"
+						},
+						{
+							"name": "example - success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/auth/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "248"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f8-B7+vOjXZzUlbi4LBF5igMmVDiZ8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:31:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"fa148d89-ee75-4799-8e94-21a537eb1898\",\n    \"name\": \"Sorphy Arike\",\n    \"email\": \"sorphyat@gmail.com\",\n    \"password\": \"$2a$10$aKN3sIm7F.8iWRLow56TWudlTtPFUpVQ397nk1PJrzJu1UKHk3K/S\",\n    \"createdAt\": \"2024-08-14T07:23:28.550Z\",\n    \"updatedAt\": \"2024-08-14T07:23:28.550Z\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints for user registration, login, and profile retrieval using JWT."
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "create new account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTE0OGQ4OS1lZTc1LTQ3OTktOGU5NC0yMWE1MzdlYjE4OTgiLCJpYXQiOjE3MjM2MjAyNjcsImV4cCI6MTcyMzYyMzg2N30.MRZRZXQDfeyvRM2pmkQt209Q0aPzxiR2Ttg37uUuYUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"balance\": 0,\n    \"accountType\": \"fixed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts"
+							]
+						},
+						"description": "This request allows you to create a new account in the banking system. You need to provide a balance and account type in the request body. Authentication is required using a Bearer token."
+					},
+					"response": [
+						{
+							"name": "example - bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"balance\": 5000,\n    \"accountType\": \"debit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-zYEJ1Eime5wfBLyv25sBtSPjk+A\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:33:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid account type\"\n}"
+						},
+						{
+							"name": "example - successful account creation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"balance\": 5000,\n    \"accountType\": \"current\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d2-FFm6PNdguA6UIFlgwNgTq2kVwmk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:34:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n    \"userId\": \"fa148d89-ee75-4799-8e94-21a537eb1898\",\n    \"balance\": 5000,\n    \"accountType\": \"current\",\n    \"updatedAt\": \"2024-08-14T07:34:35.653Z\",\n    \"createdAt\": \"2024-08-14T07:34:35.653Z\"\n}"
+						},
+						{
+							"name": "example - another account created for user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"balance\": 0,\n    \"accountType\": \"fixed\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "205"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cd-b6R+GhNsyp3n/DO1QyIWL4hEXnE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:42:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"517e9988-5004-40a1-a751-71ef39b1cb76\",\n    \"userId\": \"fa148d89-ee75-4799-8e94-21a537eb1898\",\n    \"balance\": 0,\n    \"accountType\": \"fixed\",\n    \"updatedAt\": \"2024-08-14T07:42:02.996Z\",\n    \"createdAt\": \"2024-08-14T07:42:02.996Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get account using account id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTE0OGQ4OS1lZTc1LTQ3OTktOGU5NC0yMWE1MzdlYjE4OTgiLCJpYXQiOjE3MjM2MjAyNjcsImV4cCI6MTcyMzYyMzg2N30.MRZRZXQDfeyvRM2pmkQt209Q0aPzxiR2Ttg37uUuYUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/accounts/cc207f8f-0690-447c-98b1-cdfaff13d3fb",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"cc207f8f-0690-447c-98b1-cdfaff13d3fb"
+							]
+						},
+						"description": "This request retrieves the details of an account using its unique ID. Authentication is required using a Bearer token."
+					},
+					"response": [
+						{
+							"name": "example - successfully fetched account by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/accounts/cc207f8f-0690-447c-98b1-cdfaff13d3fb",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"cc207f8f-0690-447c-98b1-cdfaff13d3fb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d2-w8GAwPGWV+grSkAKSnLMR+FaulA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:38:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n    \"userId\": \"fa148d89-ee75-4799-8e94-21a537eb1898\",\n    \"balance\": 5000,\n    \"accountType\": \"current\",\n    \"createdAt\": \"2024-08-14T07:34:35.653Z\",\n    \"updatedAt\": \"2024-08-14T07:34:35.653Z\"\n}"
+						},
+						{
+							"name": "example - failed. Wrong account id.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/accounts/cc207f8f-0690-447c-98b1-cdfaff13d3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"cc207f8f-0690-447c-98b1-cdfaff13d3"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-HATFaBog9WkEvJHff0HTXz9VWvQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:40:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Error fetching account\"\n}"
+						},
+						{
+							"name": "example - failed. Invalid token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/accounts/cc207f8f-0690-447c-98b1-cdfaff13d3fb",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"cc207f8f-0690-447c-98b1-cdfaff13d3fb"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-1luTU257I9tvKUXOJotGBQDVDqk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:40:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid token\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints for managing accounts in the banking system. It includes requests to create new accounts and retrieve account details by ID."
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "create transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTE0OGQ4OS1lZTc1LTQ3OTktOGU5NC0yMWE1MzdlYjE4OTgiLCJpYXQiOjE3MjM2MjAyNjcsImV4cCI6MTcyMzYyMzg2N30.MRZRZXQDfeyvRM2pmkQt209Q0aPzxiR2Ttg37uUuYUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n  \"type\": \"debit\",\n  \"amount\": 100.50,\n  \"description\": \"airtime\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "example - error. invalid token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n  \"type\": \"debit\",\n  \"amount\": 100.50,\n  \"description\": \"airtime\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-1luTU257I9tvKUXOJotGBQDVDqk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:43:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid token\"\n}"
+						},
+						{
+							"name": "example - transaction successfully created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n  \"type\": \"debit\",\n  \"amount\": 100.50,\n  \"description\": \"airtime\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "267"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10b-eW/XRDojgNE7Wu7PRbhvF8tktuQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:45:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"edfdafe7-3756-4990-ab64-d4557fd53c95\",\n    \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n    \"type\": \"debit\",\n    \"amount\": 100.5,\n    \"timestamp\": \"2024-08-14T07:45:24.496Z\",\n    \"description\": \"airtime\",\n    \"updatedAt\": \"2024-08-14T07:45:24.496Z\",\n    \"createdAt\": \"2024-08-14T07:45:24.496Z\"\n}"
+						},
+						{
+							"name": "example - failed to create transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n  \"type\": \"current\",\n  \"amount\": 100.50,\n  \"description\": \"airtime\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-ezCLdVbyDMauijVK3sf8cYsW0NY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:47:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid transaction type\"\n}"
+						}
+					]
+				},
+				{
+					"name": "list all transactions for a user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0OGY3NTcyZC02ZWZlLTQ5YzktODgxOS1hNDJlZGJkYjU5NDMiLCJpYXQiOjE3MjM1NjYwODEsImV4cCI6MTcyMzU2OTY4MX0.YmL8N_GRJDQd2icvyGOPvrF7FVlj8apOxqx6gHwuDvM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "example - failed to get list.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "25"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19-1luTU257I9tvKUXOJotGBQDVDqk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:48:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Invalid token\"\n}"
+						},
+						{
+							"name": "example - user transactions successfully fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "269"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10d-HbsFWYtVC8/Li39jrIXIb9wgO+0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:49:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"edfdafe7-3756-4990-ab64-d4557fd53c95\",\n        \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n        \"type\": \"debit\",\n        \"amount\": 100.5,\n        \"timestamp\": \"2024-08-14T07:45:24.496Z\",\n        \"description\": \"airtime\",\n        \"createdAt\": \"2024-08-14T07:45:24.496Z\",\n        \"updatedAt\": \"2024-08-14T07:45:24.496Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Money transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MWJlMjQ2MS01NmEzLTQ3NWUtODJhNy1kOWFiYzAzY2JlNWIiLCJpYXQiOjE3MjM1NzcxMTQsImV4cCI6MTcyMzU4MDcxNH0.Zkbg09VIp_y710y6B257loXuaO_iR7W07_2PvMfrcLM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"senderAcctId\": \"c7d27e3f-edd0-4fdd-8120-7a2f78592d8e\",\n    \"receiverAcctId\": \"dc42e680-a999-48f1-9a15-902af8dd76fd\",\n    \"amount\": 20,\n    \"description\": \"charges\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transactions/transfer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions",
+								"transfer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "example - Failed Money transfer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"senderAcctId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n    \"receiverAcctId\": \"517e9988-5004-40a1-a751-71ef39b1c6\",\n    \"amount\": 1000,\n    \"description\": \"kept\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/transactions/transfer",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions",
+										"transfer"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-DkpcXVn46uIqa/B8CiJy5ISpDFg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:52:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Error processing transfer\"\n}"
+						},
+						{
+							"name": "example - Successful Money transfer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"senderAcctId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n    \"receiverAcctId\": \"517e9988-5004-40a1-a751-71ef39b1cb76\",\n    \"amount\": 1000,\n    \"description\": \"kept\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/transactions/transfer",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"transactions",
+										"transfer"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "735"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2df-FbvhrGreJ2fsED3v78tBrmF6ftQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Aug 2024 07:53:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Transfer successful\",\n    \"transaction\": {\n        \"debitTransaction\": {\n            \"id\": \"59a9ac77-ab0d-4b76-b120-4ab7c207a543\",\n            \"accountId\": \"cc207f8f-0690-447c-98b1-cdfaff13d3fb\",\n            \"type\": \"debit\",\n            \"amount\": 1000,\n            \"timestamp\": \"2024-08-14T07:53:44.898Z\",\n            \"description\": \"Transfer to account 517e9988-5004-40a1-a751-71ef39b1cb76: kept\",\n            \"updatedAt\": \"2024-08-14T07:53:44.899Z\",\n            \"createdAt\": \"2024-08-14T07:53:44.899Z\"\n        },\n        \"creditTransaction\": {\n            \"id\": \"73d26147-05dd-4222-a7eb-1d7cbf8fc7d9\",\n            \"accountId\": \"517e9988-5004-40a1-a751-71ef39b1cb76\",\n            \"type\": \"credit\",\n            \"amount\": 1000,\n            \"timestamp\": \"2024-08-14T07:53:44.905Z\",\n            \"description\": \"Transfer from account cc207f8f-0690-447c-98b1-cdfaff13d3fb: kept\",\n            \"updatedAt\": \"2024-08-14T07:53:44.905Z\",\n            \"createdAt\": \"2024-08-14T07:53:44.905Z\"\n        }\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains endpoints for handling transactions, including creation, listing, and money transfers."
+		}
+	]
+}

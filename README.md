@@ -79,11 +79,6 @@ The Banking System API is a backend service built with Node.js, TypeScript, and 
    ```bash
    yarn dev
    ```
-2. **Start the application in production mode:**
-
-   ```bash
-   yarn start
-   ```
 
 ## API Endpoints
 
